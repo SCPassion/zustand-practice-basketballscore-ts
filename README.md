@@ -81,3 +81,17 @@ store.decrementScore("guest", 1); // Decrement guestScore by 1
 ```
 
 This approach gives you access to all the state and actions defined in the store.
+
+### 6. Setting State Directly in the Store
+In Zustand, you can set a variable directly in the `set()` function without using a callback. For example, instead of using a callback to update the state, you can directly assign a value:
+
+```typescript
+export const useScoresStore = create<ScoresStore>((set) => ({
+  homeScore: 0,
+  guestScore: 0,
+  win: false,
+  setWinning: () => set({ win: true }), // Directly setting the state
+}));
+```
+
+This approach is simpler when you don't need to reference the previous state. However, if your update depends on the current state, you should use a callback function in `set()` to ensure the state is updated correctly.
